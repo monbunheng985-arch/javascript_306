@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="v1" placeholder="please enter value 1">
+    <input type="number" id="v2" placeholder="please enter value 2">
+    <p id="total"></p>
+    <button onclick="Plus()">Plus</button>
+    <button onclick="Multiply()">Multiply</button>
+    <button onclick="Divide()">Divide</button>
+    <button onclick="Minus()">Subtract</button>
+    <button onclick="Modulus()">Modulus</button>
+    <script>
+        function Plus(){
+        let v1= document.getElementById('v1').value;
+        let v2= document.getElementById('v2').value;
+        console.log(v1,v2);
+        let result= Number(v1)+Number(v2);
+        document.getElementById('total').innerHTML=result;
+        }
+    </script>
+    <script>
+        function Multiply(){
+        let v1= document.getElementById('v1').value;
+        let v2= document.getElementById('v2').value;
+        console.log(v1,v2);
+        let result= Number(v1)* Number(v2);
+        document.getElementById('total').innerHTML=result;
+        }
+    </script>
+    <script>
+        function Divide(){
+        let v1= document.getElementById('v1').value;
+        let v2= document.getElementById('v2').value;
+        console.log(v1,v2);
+        let result= Number(v1)/Number(v2);
+        document.getElementById('total').innerHTML=result;
+        }
+    </script>
+    <script>
+        function Minus(){
+        let v1= document.getElementById('v1').value;
+        let v2= document.getElementById('v2').value;
+        console.log(v1,v2);
+        let result= Number(v1)-Number(v2);
+        document.getElementById('total').innerHTML=result;
+        }
+    </script>
+    <script>
+        function M(){
+        let v1= document.getElementById('v1').value;
+        let v2= document.getElementById('v2').value;
+        console.log(v1,v2);
+        let result= Number(v1)-Number(v2);
+        document.getElementById('total').innerHTML=result;
+        }
+    </script>
+</body>
+</html>

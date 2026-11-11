@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>គណនាថ្លៃផ្ញើរយានជំនិះ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>គណនាថ្លៃផ្ញើរយានជំនិះ</h1>
+    <div class="row"><label for="type">ជ្រើសរើស យានជំនិះ</label>
+      <select id="type"><option value="car">ឡាន</option><option value="moto">ម៉ូតូ</option></select></div>
+    <div class="row"><label for="in">ម៉ោងចូល</label><input id="in" type="time"></div>
+    <div class="row"><label for="out">ម៉ោងចេញ</label><input id="out" type="time"></div>
+    <div class="row"><label>ថ្លៃផ្ញើរ រៀល</label><input id="riel" readonly placeholder="៛"></div>
+    <div class="row"><label>ថ្លៃផ្ញើរ ដុល្លា</label><input id="usd" readonly placeholder="$"></div>
+    <button id="calc">គណនា</button>
+    <div class="note" id="note"></div>
+  </div>
+
+ 
+
+<script>
+  const RATES = { car: [500, 1000], moto: [200, 300] }; 
+  const RIEL_PER_USD = 4000;
+
+  document.getElementById('calc').addEventListener('click', () => {
+    const note = document.getElementById('note');
+    const tin = document.getElementById('in').value;
+    const tout = document.getElementById('out').value;
+    if (!tin || !tout) { note.textContent = 'សូមបញ្ចូលម៉ោងចូល និងម៉ោងចេញ'; return; }
+
+    const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+    let diff = toMin(tout) - toMin(tin);
+    if (diff < 0) diff += 24 * 60;            
+
+    const hours = Math.ceil(diff / 60);       
+    const [r1, r2] = RATES[document.getElementById('type').value];
+ 
+    const TIERED = false;
+    const riel = TIERED
+      ? Math.min(hours, 8) * r1 + Math.max(hours - 8, 0) * r2
+      : hours * (hours > 8 ? r2 : r1);
+
+    document.getElementById('riel').value = riel.toLocaleString() + ' រៀល (៛)';
+    document.getElementById('usd').value = (riel / RIEL_PER_USD).toFixed(2) + ' ដុល្លារ ($)';
+    note.textContent = `រយៈពេល ${hours} ម៉ោង`;
+  });
+</script>
+</body>
+</html>
